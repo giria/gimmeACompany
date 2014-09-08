@@ -42,7 +42,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 #pragma mark - MKMapViewDelegate methods.
+
 -(void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views {
     //Zoom back to the user location after adding a new set of annotations.
     //Get the center point of the visible map.
@@ -52,7 +54,7 @@
     if (firstLaunch) {
         region = MKCoordinateRegionMakeWithDistance(locationManager.location.coordinate,1000,1000);
         firstLaunch=NO;
-    }else {
+    } else {
         //Set the center point to the visible region of the map and change the radius to match the search radius passed to the Google query string.
         region = MKCoordinateRegionMakeWithDistance(centre,currenDist,currenDist);
     }
@@ -68,7 +70,7 @@
     NSString *buttonTitle = [button.title lowercaseString];
     [self queryGooglePlaces: @"bar"];
     [self createDatabase];
-    [self saveData];
+    //[self saveData];
 }
 -(void) queryGooglePlaces: (NSString *) googleType {
     // Build the url string to send to Google. NOTE: The kGOOGLE_API_KEY is a constant that should contain your own API key that you obtain from Google. See this link for more info:
@@ -111,6 +113,8 @@
     
     //Write out the data to the console.
     NSLog(@"Google Data: %@", places);
+    NSArray *arrayMailPoints = [PointBuilder groupsFromJSON: responseData error: nil ];
+    [self saveData: arrayMailPoints];
     [self plotPositions:places];
 }
 
@@ -201,12 +205,12 @@
         if (sqlite3_open(dbpath, &companyDB) == SQLITE_OK)
         {
             char *errMsg;
-            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS COMPANYDB (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, ADDRESS TEXT, PHONE TEXT)";
+            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS COMPANYDB (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, ADDRESS TEXT, LAT TEXT, LNG TEXT)";
             
             if (sqlite3_exec(companyDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK)
             {
                 //status.text = @"Failed to create table";
-                NSLog(@" Failed to create table");
+                NSLog(@" Failed to create table %@", errMsg);
             }
             
             sqlite3_close(companyDB);
@@ -221,29 +225,64 @@
     
 }
 
-- (void) saveData
+//- (void) saveData
+//{
+//    sqlite3_stmt    *statement;
+//    const char *dbpath = [databasePath UTF8String];
+//    
+//    if (sqlite3_open(dbpath, &companyDB) == SQLITE_OK)
+//    {
+//        NSString *insertSQL = [NSString stringWithFormat:
+//                               @"INSERT INTO companyDB(name, address, phone) VALUES (\"%@\", \"%@\", \"%@\")",
+//                               @"nombre empresa", @"calle alas, 1", @"123"];
+//        const char *insert_stmt = [insertSQL UTF8String];
+//        sqlite3_prepare_v2(companyDB, insert_stmt,
+//                           -1, &statement, NULL);
+//        if (sqlite3_step(statement) == SQLITE_DONE)
+//        {
+//            NSLog(@"Company added");
+//        } else {
+//            NSLog(@"Failed to add contact");
+//        }
+//        sqlite3_finalize(statement);
+//        sqlite3_close(companyDB);
+//    }
+//}
+
+- (void) saveData: (NSArray * ) array
 {
+    
+    [ array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        MailPoint * mailPoint = (MailPoint *) obj;
+   
+    
     sqlite3_stmt    *statement;
     const char *dbpath = [databasePath UTF8String];
     
     if (sqlite3_open(dbpath, &companyDB) == SQLITE_OK)
     {
         NSString *insertSQL = [NSString stringWithFormat:
-                               @"INSERT INTO companyDB(name, address, phone) VALUES (\"%@\", \"%@\", \"%@\")",
-                                                              @"nombre empresa", @"calle alas, 1", @"123"];
-                                                              const char *insert_stmt = [insertSQL UTF8String];
-                                                              sqlite3_prepare_v2(companyDB, insert_stmt,
-                                                                                 -1, &statement, NULL);
-                                                              if (sqlite3_step(statement) == SQLITE_DONE)
-                                                              {
-                                                                  NSLog(@"Company added");
-                                                              } else {
-                                                                  NSLog(@"Failed to add contact");
-                                                              }
-                                                              sqlite3_finalize(statement);
-                                                              sqlite3_close(companyDB);
-                                                              }
-                                                              }
+                               @"INSERT INTO companyDB(name, address, lat, lng) VALUES (\"%@\", \"%@\", \"%f\",\"%f\")",
+                               mailPoint.name, mailPoint.vicinity, mailPoint.coordinate.latitude, mailPoint.coordinate.longitude];
+        const char *insert_stmt = [insertSQL UTF8String];
+        sqlite3_prepare_v2(companyDB, insert_stmt,
+                           -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            NSLog(@"Company added");
+        } else {
+            NSLog(@"Failed to add contact");
+            NSLog(@"Database returned error %d: %s", sqlite3_errcode(companyDB), sqlite3_errmsg(companyDB));
+        }
+        sqlite3_finalize(statement);
+        
+       
+    }
+   }];
+     sqlite3_close(companyDB);
+}
+
+
 
 - (void)displayComposerSheet
 {

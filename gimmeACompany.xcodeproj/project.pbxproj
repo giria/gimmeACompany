@@ -34,6 +34,8 @@
 		8A4F1C6C193147FC007702FE /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4F1C6B193147FC007702FE /* HelpViewController.m */; };
 		8A4F1C6E19315752007702FE /* Mobile_Signal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A4F1C6D19315752007702FE /* Mobile_Signal.png */; };
 		8A4F1C701931578B007702FE /* Reading.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A4F1C6F1931578B007702FE /* Reading.png */; };
+		8AAB9FF319BCADD500368862 /* PointBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB9FF219BCADD500368862 /* PointBuilder.m */; };
+		8AAB9FF619BCAFF100368862 /* MailPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB9FF519BCAFF100368862 /* MailPoint.m */; };
 		8AE5EF171923B98A0068E756 /* MapPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE5EF161923B98A0068E756 /* MapPoint.m */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +84,10 @@
 		8A4F1C6B193147FC007702FE /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		8A4F1C6D19315752007702FE /* Mobile_Signal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mobile_Signal.png; sourceTree = "<group>"; };
 		8A4F1C6F1931578B007702FE /* Reading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reading.png; sourceTree = "<group>"; };
+		8AAB9FF119BCADD500368862 /* PointBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointBuilder.h; sourceTree = "<group>"; };
+		8AAB9FF219BCADD500368862 /* PointBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointBuilder.m; sourceTree = "<group>"; };
+		8AAB9FF419BCAFF100368862 /* MailPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailPoint.h; sourceTree = "<group>"; };
+		8AAB9FF519BCAFF100368862 /* MailPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailPoint.m; sourceTree = "<group>"; };
 		8AE5EF151923B98A0068E756 /* MapPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPoint.h; sourceTree = "<group>"; };
 		8AE5EF161923B98A0068E756 /* MapPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPoint.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,6 +184,10 @@
 				8AE5EF161923B98A0068E756 /* MapPoint.m */,
 				8A3EC8E71922B1DE007551D8 /* Images.xcassets */,
 				8A3EC8D61922B1DE007551D8 /* Supporting Files */,
+				8AAB9FF119BCADD500368862 /* PointBuilder.h */,
+				8AAB9FF419BCAFF100368862 /* MailPoint.h */,
+				8AAB9FF519BCAFF100368862 /* MailPoint.m */,
+				8AAB9FF219BCADD500368862 /* PointBuilder.m */,
 			);
 			path = CompanyDB;
 			sourceTree = "<group>";
@@ -319,8 +329,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AAB9FF319BCADD500368862 /* PointBuilder.m in Sources */,
 				8A4F1C6C193147FC007702FE /* HelpViewController.m in Sources */,
 				8A3EC8E61922B1DE007551D8 /* ViewController.m in Sources */,
+				8AAB9FF619BCAFF100368862 /* MailPoint.m in Sources */,
 				8A32B0B51931EDA3009637FF /* InitViewController.m in Sources */,
 				8AE5EF171923B98A0068E756 /* MapPoint.m in Sources */,
 				8A3EC8E01922B1DE007551D8 /* AppDelegate.m in Sources */,

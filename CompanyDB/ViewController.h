@@ -12,6 +12,7 @@
 #import "MapPoint.h"
 #import <sqlite3.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import "PointBuilder.h"
 
 #define kGOOGLE_API_KEY @"AIzaSyAGoyMvg5SbEKujjD-hKdg_xG52bbFmTTs"
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)

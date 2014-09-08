@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>252D866F-9375-4D7B-BE0D-27858F94816B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>gimmeACompany</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C057EC4A-789A-4A25-840F-8A4EC82D4D9D</key>
+		<string>ssh://github.com/giria/gimmeACompany.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>gimmeACompany.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C057EC4A-789A-4A25-840F-8A4EC82D4D9D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/giria/gimmeACompany.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C057EC4A-789A-4A25-840F-8A4EC82D4D9D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C057EC4A-789A-4A25-840F-8A4EC82D4D9D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CompanyDB</string>
+		</dict>
+	</array>
+</dict>
+</plist>
