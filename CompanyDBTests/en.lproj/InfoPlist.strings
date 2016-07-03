@@ -1,2 +1,6 @@
 /* Localized versions of Info.plist keys */
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>This application requires location services to work</string>
 
+<key>NSLocationAlwaysUsageDescription</key>
+<string>This application requires location services to work</string>

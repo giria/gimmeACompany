@@ -27,6 +27,8 @@
     
     //Instantiate a location object.
     locationManager = [[CLLocationManager alloc] init];
+    [locationManager requestAlwaysAuthorization];
+    
     
     //Make this controller the delegate for the location manager.
     [locationManager setDelegate:self];
@@ -35,6 +37,7 @@
     [locationManager setDistanceFilter:kCLDistanceFilterNone];
     [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     firstLaunch=YES;
+   
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,6 +65,7 @@
     [mv setRegion:region animated:YES];
 }
 - (IBAction) savePlaces:(UIButton *)sender {
+    NSLog(@" at savePlaces");
     [self displayComposerSheet ];
 }
 
@@ -83,7 +87,7 @@
     NSLog(@"url %@", url);
     
     //Formulate the string as a URL object.
-    NSURL *googleRequestURL=[NSURL URLWithString:url];
+    NSURL *googleRequestURL = [NSURL URLWithString:url];
     
     // Retrieve the results of the URL.
     dispatch_async(kBgQueue, ^{
@@ -287,24 +291,26 @@
 - (void)displayComposerSheet
 {
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-    picker.mailComposeDelegate = self;
-    [picker setSubject:@"Check out this database!"];
+    if ([MFMailComposeViewController canSendMail]) {
+      picker.mailComposeDelegate = self;
+      [picker setSubject:@"Check out this database!"];
     
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:@"company.sqlite3"];
-    NSLog(@"documents directory %@   ", appFile);
-    NSData *myData = [[NSData alloc] initWithContentsOfFile:appFile] ;
-    NSLog(@"NSData %@   ", myData);
-    [picker addAttachmentData:myData mimeType:@"application/x-sqlite3" fileName:@"company.sqlite3"];
+      NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+      NSString *documentsDirectory = [paths objectAtIndex:0];
+      NSString *appFile = [documentsDirectory stringByAppendingPathComponent:@"company.sqlite3"];
+      NSLog(@"documents directory %@   ", appFile);
+      NSData *myData = [[NSData alloc] initWithContentsOfFile:appFile] ;
+      NSLog(@"NSData %@   ", myData);
+      [picker addAttachmentData:myData mimeType:@"application/x-sqlite3" fileName:@"company.sqlite3"];
     
     
     
-    // Fill out the email body text
-    NSString *emailBody = @"My cool database is attached";
-    [picker setMessageBody:emailBody isHTML:NO];
-    [self presentModalViewController:picker animated:YES];
+      // Fill out the email body text
+      NSString *emailBody = @"My cool database is attached";
+      [picker setMessageBody:emailBody isHTML:NO];
+      [self presentViewController:picker animated:YES completion:nil];
+    }
     
 }
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
